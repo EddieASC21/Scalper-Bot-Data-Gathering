@@ -1,1 +1,1 @@
-#APP Scalper Bot Data Gathering
+#AMP Scalper Bot Data Gathering
