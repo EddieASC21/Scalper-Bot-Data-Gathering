@@ -59,7 +59,7 @@ class Customer():
         if self.status == "autofill":
             self.Power = random.randint(1,5)
         if self.status == "bots":
-            self.Power = random.randint(1,20)
+            self.Power = random.randint(1,10)
 
 
 class Queue():
@@ -238,15 +238,15 @@ class Queue():
             elif self.waitList[CustomerList[CustNum]][4] > self.capacity:
                 # print(str(CustNum) + "custNum")
                 if self.waitList[CustomerList[CustNum]][5] == "bots":
-                    print("Final Bot Detected")
+                    #print("Final Bot Detected")
                     DefChance = random.randint(1,100)
                     if DefChance <= 25:
-                        print("Final Bot removed")
+                        #print("Final Bot removed")
                         notServed.append(self.waitList[CustomerList[CustNum]])
                         CustNum += 1
                         break 
                     else:
-                        print("Final Bot Succeeded")
+                        #print("Final Bot Succeeded")
                         #print(str(self.waitList[CustomerList[CustNum]][4]) + ": Take Power(before)")
                         self.waitList[CustomerList[CustNum]][4] = self.capacity
                         #print(self.waitList[CustomerList[CustNum]][4])
@@ -311,17 +311,17 @@ class Queue():
             if (self.capacity <= 0) or (CustNum >= (len(self.waitList)-1)):
                 flag = True
             elif self.waitList[CustomerList[CustNum]][4] > self.capacity:
-                # print(str(CustNum) + "custNum")
+                #print(str(CustNum) + "custNum")
                 if self.waitList[CustomerList[CustNum]][5] == "bots":
                     print("Final Bot Detected")
                     DefChance = random.randint(1,100)
                     if DefChance <= 60:
-                        print("Final Bot removed")
+                        #print("Final Bot removed")
                         notServed.append(self.waitList[CustomerList[CustNum]])
                         CustNum += 1
                         break 
                     else:
-                        print("Final Bot Succeeded")
+                        #print("Final Bot Succeeded")
                         #print(str(self.waitList[CustomerList[CustNum]][4]) + ": Take Power(before)")
                         self.waitList[CustomerList[CustNum]][4] = self.capacity
                         #print(self.waitList[CustomerList[CustNum]][4])
@@ -402,13 +402,13 @@ def test1_simulation():
     test_results_served_ha = []
     test_results_notServed_bots = []
     test_results_notServed_ha = []
-    humans = 600      #random.randint(17400,18600)
-    autofill = 200     #random.randint(5400,6600)
-    bots = 200        #random.randint(5400, 6600)
+    humans = random.randint(37700,40300)
+    autofill = random.randint(11700,14300)
+    bots = random.randint(11700, 14300)
 
-    for i in range(10):
+    for i in range(100):
         #print (i)
-        test = Queue(1000, "None")
+        test = Queue(65000, "None")
         test_results = test.simulateQueue(humans,autofill, bots)
         t1_bots = splitServed(test_results[0])[0]
         t1_ha = splitServed(test_results[0])[1]
@@ -419,7 +419,6 @@ def test1_simulation():
         test_results_served_ha.append(t1_ha)
         test_results_notServed_bots.append(t1_noBots)
         test_results_notServed_ha.append(t1_noHa)
-
 
 
     avg_S_bots = sum(test_results_served_bots) / (len(test_results_served_bots))
@@ -439,7 +438,7 @@ def test1_simulation():
     
     pie_ND = np.array([avg_S_bots,avg_S_ha,avg_NS_bots,avg_NS_ha])
     myLabels = ["Bots ", "Human and Autofill", "Bots Not Served", "Humans and Autofill Not Served"]
-    myColors = ["#D0E1D4", "#457B9D","#EF6F6C", "#87C38F"]
+    myColors = ["#53A548", "#96C5F7","#EF6F6C", "#F4D35E"]
     fracs = [avg_S_bots,avg_S_ha,avg_NS_bots,avg_NS_ha]
     total = sum(fracs)
     plt.pie(pie_ND, labels = myLabels, colors = myColors,
@@ -451,7 +450,7 @@ def test1_simulation():
     bar_graph_x_ND = np.array(["Humans and \nAutofill Served", "Bots \nServed", "Humans and \nAutofill Not Served", "Bots Not \nServed"])
     bar_graph_y_ND = np.array([(sum(test_results_served_ha)),(sum(test_results_served_bots)),(sum(test_results_notServed_ha)),sum(test_results_notServed_bots)])
     plt.bar(bar_graph_x_ND,bar_graph_y_ND,color = "#8DB580")
-    plt.title("Resources distributed in ten 100 capacity queue simulations")
+    plt.title("Resources distributed in one hundred 65000 capacity queue simulations")
     plt.show()
 
 
@@ -460,13 +459,13 @@ def test2_simulation():
     test2_results_served_ha = []
     test2_results_notServed_bots = []
     test2_results_notServed_ha = []
-    humans = 600      #random.randint(17400,18600)
-    autofill = 200     #random.randint(5400,6600)
-    bots = 200         #random.randint(5400, 6600)
+    humans = random.randint(37700,40300)
+    autofill = random.randint(11700,14300)
+    bots = random.randint(11700, 14300)
 
-    for i in range(10):
+    for i in range(100):
         #print (i)
-        test2 = Queue(1000, "Captcha")
+        test2 = Queue(65000, "Captcha")
         test2_results = test2.simulateQueue_CA(humans,autofill, bots)
         t2_bots = splitServed(test2_results[0])[0]
         t2_ha = splitServed(test2_results[0])[1]
@@ -500,7 +499,7 @@ def test2_simulation():
     plt.clf()
     pie_CA = np.array([avg_S_bots2,avg_S_ha2,avg_NS_bots2,avg_NS_ha2])
     myLabels_CA = ["Bots ", "Human and Autofill", "Bots Not Served", "Humans and Autofill Not Served"]
-    myColors_CA = ["#317B22", "#E09F3E","#96C5F7", "#976391"]
+    myColors_CA = ["#53A548", "#96C5F7","#EF6F6C", "#F4D35E"]
     fracs = [avg_S_bots2,avg_S_ha2,avg_NS_bots2,avg_NS_ha2]
     total = sum(fracs)
     plt.pie(pie_CA, labels = myLabels_CA, colors = myColors_CA,
@@ -511,7 +510,7 @@ def test2_simulation():
     bar_graph_x_CA = np.array(["Humans and \nAutofill Served", "Bots \nServed", "Humans and \nAutofill Not Served", "Bots Not \nServed"])
     bar_graph_y_CA = np.array([(sum(test2_results_served_ha)),(sum(test2_results_served_bots)),(sum(test2_results_notServed_ha)),sum(test2_results_notServed_bots)])
     plt.bar(bar_graph_x_CA,bar_graph_y_CA,color = "#F4D35E")
-    plt.title("Resources distributed in ten 100 capacity queue simulations with Captcha Defense")
+    plt.title("Resources distributed in one hundred \n65000 capacity queue simulations with Captcha Defense")
     plt.show()
 
 def test3_simulation():
@@ -519,14 +518,14 @@ def test3_simulation():
     test3_results_served_ha = []
     test3_results_notServed_bots = []
     test3_results_notServed_ha = []
-    humans = 600      #random.randint(17400,18600)
-    autofill = 200     #random.randint(5400,6600)
-    bots = 200         #random.randint(5400, 6600)
+    humans = random.randint(37700,40300)
+    autofill = random.randint(11700,14300)
+    bots = random.randint(11700, 14300)
 
 
-    for i in range(10):
+    for i in range(100):
         #print (i)
-        test3 = Queue(1000, "Proxy")
+        test3 = Queue(65000, "Proxy")
         test3_results = test3.simulateQueue_PR(humans,autofill, bots)
         t3_bots = splitServed(test3_results[0])[0]
         t3_ha = splitServed(test3_results[0])[1]
@@ -559,17 +558,17 @@ def test3_simulation():
     plt.clf()
     pie_PR = np.array([avg_S_bots3,avg_S_ha3,avg_NS_bots3,avg_NS_ha3])
     myLabels_PR = ["Bots ", "Human and Autofill", "Bots Not Served", "Humans and Autofill Not Served"]
-    myColors_PR = ["#48BEFF", "#9A031E","#53A548", "#E7DFC6"]
+    myColors_PR = ["#53A548", "#96C5F7","#EF6F6C", "#F4D35E"]
     fracs = [avg_S_bots3,avg_S_ha3,avg_NS_bots3,avg_NS_ha3]
     total = sum(fracs)
     plt.pie(pie_PR, labels = myLabels_PR, colors = myColors_PR,
     autopct=lambda p: '{:.0f}%'.format(p * 100/ 100))
-    plt.title("Bots served Vs Humans and Autofill users served with Proxy defense")
+    plt.title("Bots served Vs Humans and Autofill users \nserved with Proxy defense and restricted bots")
     plt.show()
 
 
     bar_graph_x_PR = np.array(["Humans and \nAutofill Served", "Bots \nServed", "Humans and \nAutofill Not Served", "Bots Not \nServed"])
     bar_graph_y_PR = np.array([(sum(test3_results_served_ha)),(sum(test3_results_served_bots)),(sum(test3_results_notServed_ha)),sum(test3_results_notServed_bots)])
     plt.bar(bar_graph_x_PR,bar_graph_y_PR,color = "#B20D30")
-    plt.title("Resources distributed in ten 100 capacity queue simulations with Proxy Defense")
+    plt.title("Resources distributed in one hundred \n65000 capacity queue simulations \nwith Proxy Defense and restricted bots")
     plt.show()
