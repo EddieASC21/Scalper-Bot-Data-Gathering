@@ -1,7 +1,5 @@
 # Scalper-Bot-Data-Gathering
 
-![Scalper Bot Data Gathering Poster](Scalper-Bot-Data-Gathering.png)
-
 ## Overview
 This project simulates a queue system designed to process different types of customers—humans, autofill users, and bots. Each customer type has unique properties like arrival time, service time, and the resources they consume from the queue. This simulation helps visualize how different strategies can impact the efficiency and fairness of queue management, especially in systems susceptible to scalping bots.
 
